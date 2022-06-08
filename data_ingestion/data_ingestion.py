@@ -1,3 +1,4 @@
+import ffmpeg
 import numpy as np
 import pandas as pd
 from dotenv import load_dotenv
@@ -22,3 +23,9 @@ def extract_videos_s3(s3path = 's3://'):
         if i.endswith(video_format):
             list.append(i)
     return(list)
+
+# write each file_path into .txt file where each line contains one file_path
+with open(txt_file_path, 'w') as f:
+    for item in file_paths:
+        f.write("%s\n" % item)
+        
