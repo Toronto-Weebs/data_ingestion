@@ -9,16 +9,16 @@ import os
 def extract_videos_local(path = './'):
     list = []
     for i in os.listdir(path):
-        if i.endswith(".mp4"):
+        if i.endswith(video_format):
             list.append(i)
     return(list)
 
 ## get list of mp4 files (s3)
 def extract_videos_s3(s3path = 's3://'):
-    fs = s3fs.S3FileSystem(key='AKIAWS6WCPETLOBWFPZK',
-                           secret='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')
+    fs = s3fs.S3FileSystem(key=KEY,
+                           secret=SECRET)
     list = []
     for i in fs.ls(s3path):
-        if i.endswith(".mp4"):
+        if i.endswith(video_format):
             list.append(i)
     return(list)
