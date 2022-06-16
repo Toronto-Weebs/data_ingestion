@@ -1,11 +1,12 @@
+import os
+import sys
 import ffmpeg
-import numpy as np
-import pandas as pd
 from dotenv import load_dotenv
 from pathlib import Path
 import s3fs
-import os
 
+
+KEY, SECRET, VIDEO_FORMAT, OUTPUT_DIR = sys.argv[0], sys.argv[1], sys.argv[2], sys.argv[3]
 ## get list of mp4 files (local)
 def extract_videos_local(path = './'):
     list = []
@@ -20,7 +21,7 @@ def extract_videos_s3(s3path = 's3://'):
                            secret=SECRET)
     list = []
     for i in fs.ls(s3path):
-        if i.endswith(video_format):
+        if i.endswith(VIDEO_FORMAT):
             list.append(i)
     return(list)
 
