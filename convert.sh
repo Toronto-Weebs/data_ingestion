@@ -1,14 +1,11 @@
 # Take inputs of a directory from stdin 
 INPUT_DIR=$1
+OUTPUT_DIR=$2
 
-# Convert videos in the directory to the specified format.
+ffmpeg -i sample.mp4 -vf "select='eq(pict_type,I)'" -vsync vfr out-%02d.jpeg
 
-# through the txt file of file_paths
-
-# for loop run through the file_paths and convert the videos through ffmpeg
-
-# output to a new directory
-
-# Usage: convert.sh [options] [input_dir]
-
-# Options:
+for video in INPUT_DIR/*; do
+    mkdir -p "$OUTPUT_IDR/$video" # create a directory for each video
+    VIDEO_DIR="$OUTPUT_IDR/$video" # set the directory to the video
+    ffmpeg -i $video -vf "select='eq(pict_type,I)'" -vsync vfr "$videVIDEO_DIR/out-%02d.jpeg" # extract the IDR frames
+done
